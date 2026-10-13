@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>Admin · ACES DineLearn</title>
+<style>
+:root{--p:#4B2A9B;--p2:#7C4DDB;--ink:#1B1740;--mu:#6B6890;--bd:#E4E0F3;--bg:#F5F3FC;--ok:#14724C;--bad:#B42318}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 Inter,system-ui,"Segoe UI",Roboto,sans-serif}
+[hidden]{display:none!important}button,input,select{font:inherit;color:inherit}
+.ly{display:grid;grid-template-columns:230px minmax(0,1fr);min-height:100vh}
+.sb{background:linear-gradient(180deg,#2A1466,#3B1D86);color:#fff;padding:16px 10px;position:sticky;top:0;height:100vh;overflow:auto}
+.sb h1{font-size:15px;margin:4px 10px 14px}.sb h1 small{display:block;font-weight:400;opacity:.7;font-size:12px}
+.sb p{margin:14px 10px 4px;font-size:12px;opacity:.65}
+.sb a{display:block;padding:8px 12px;border-radius:9px;color:#fff;text-decoration:none;opacity:.88}
+.sb a:hover{background:rgba(255,255,255,.1)}.sb a.on{background:var(--p2);opacity:1;font-weight:600}
+.mn{min-width:0}.tp{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 24px;background:#fff;border-bottom:1px solid var(--bd)}
+.tp span{color:var(--mu)}.pad{padding:24px;display:grid;gap:18px}
+h2{margin:0;font-size:24px}.sub{margin:2px 0 0;color:var(--mu)}h3{margin:0 0 10px;font-size:16px}
+.hd{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
+.cd{background:#fff;border:1px solid var(--bd);border-radius:14px;padding:18px}
+.st{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px}
+.st div{background:#fff;border:1px solid var(--bd);border-radius:14px;padding:14px 18px;color:var(--mu);font-weight:600}
+.st b{display:block;font-size:30px;color:var(--p);line-height:1.2}
+.g3{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1.2fr) minmax(0,1fr);gap:18px}
+.ch{display:flex;gap:16px;height:170px;border-bottom:1px solid var(--bd)}
+.ch div{flex:1;display:flex;align-items:flex-end;justify-content:center;gap:4px}
+.br{width:22px;background:var(--p);border-radius:4px 4px 0 0}.br.l{background:#B9A4EE}
+.lb{display:flex;gap:16px;margin-top:6px;color:var(--mu);font-size:12.5px;text-align:center}.lb span{flex:1}
+.dn{width:150px;height:150px;border-radius:50%;display:grid;place-items:center;margin:4px auto 12px}
+.dn i{width:92px;height:92px;border-radius:50%;background:#fff;display:grid;place-items:center;font-style:normal;font-weight:700;text-align:center;font-size:12px}
+.lg div{display:flex;justify-content:space-between;padding:2px 0}.lg em{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:8px}
+.qa{display:grid;gap:8px}
+.b{display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:0 16px;border:0;border-radius:10px;background:var(--p);color:#fff;font-weight:600;cursor:pointer}
+.b:hover{filter:brightness(1.1)}.b.o{background:#F4F0FF;color:var(--p);border:1px solid #D9D2F7}.b.d{background:#fff;color:var(--bad);border:1px solid #F1C9C5}
+.b.s{min-height:32px;padding:0 11px;font-size:13px}.qa .b{justify-content:flex-start}
+button:focus-visible,a:focus-visible{outline:2px solid var(--p2);outline-offset:2px}
+.fm{display:grid;gap:12px}.fm label{display:grid;gap:5px;font-weight:600;font-size:13px}
+input,select{min-height:40px;padding:8px 12px;border:1px solid #D9DEEC;border-radius:10px;background:#fff;width:100%}
+input:focus,select:focus{outline:0;border-color:var(--p2);box-shadow:0 0 0 3px rgba(124,77,219,.18)}
+#q{max-width:320px;margin-bottom:12px}
+.tw{overflow-x:auto}table{width:100%;border-collapse:collapse;min-width:560px}
+th{text-align:left;font-size:12.5px;color:var(--mu);padding:8px 10px;border-bottom:1px solid var(--bd);background:#FBFAFF}
+td{padding:10px;border-bottom:1px solid #F0EEFA;vertical-align:middle}td small{display:block;color:var(--mu)}
+.ac{display:flex;gap:6px;flex-wrap:wrap}.none{text-align:center;color:var(--mu);padding:26px}
+.pill{display:inline-block;padding:2px 10px;border-radius:99px;font-size:12px;font-weight:600;background:#EEF0F6;color:#4A5572}.pill.a{background:#E3F5EC;color:var(--ok)}
+.mini{display:inline-block;margin:2px 4px 2px 0;padding:1px 8px;border-radius:99px;background:#F1EEFF;color:var(--p);font-size:12px;font-weight:600}
+.err{margin:0;padding:9px 12px;border-radius:10px;background:#FDECEC;color:var(--bad)}
+.mdl{position:fixed;inset:0;z-index:60;display:grid;place-items:center;padding:20px;background:rgba(27,23,64,.45)}
+.mp{width:100%;max-width:460px;max-height:90vh;overflow:auto;background:#fff;border-radius:16px;padding:22px}
+.ft{display:flex;gap:8px;justify-content:flex-end;margin-top:14px;flex-wrap:wrap}
+.cr{margin:12px 0;padding:14px;border-radius:12px;background:var(--bg);border:1px solid var(--bd);display:grid;gap:8px}
+.cr div{display:flex;justify-content:space-between;gap:12px}.cr span{color:var(--mu)}.cr code{font-weight:700;overflow-wrap:anywhere}
+.note{padding:10px 12px;border-radius:10px;background:#FFF6E8;color:#9A5B07}
+.gate{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:20px;background:linear-gradient(135deg,#2A1466,#5B3FE0)}
+.tt{position:fixed;left:50%;bottom:20px;transform:translate(-50%,16px);background:var(--ink);color:#fff;padding:10px 16px;border-radius:10px;opacity:0;pointer-events:none;transition:.2s;z-index:120}.tt.on{opacity:1;transform:translate(-50%,0)}
+@media(max-width:1000px){.g3{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:800px){.ly{grid-template-columns:minmax(0,1fr)}.sb{position:static;height:auto}.pad{padding:16px}}
+@media print{.sb,.tp,.hd .b,.hd button{display:none}.ly{display:block}}
+@media(prefers-reduced-motion:reduce){.tt{transition:none}}
+</style></head>
+<body>
+<div class="gate" id="gate"><form class="mp" id="gf" autocomplete="off"><h3 id="gt"></h3><p class="sub" id="gp" style="margin-bottom:12px"></p>
+<div class="fm"><label>Username<input value="admin" disabled></label><label>Password<input id="gpw" type="password" required></label>
+<label id="gcw" hidden>Confirm password<input id="gpw2" type="password"></label><p class="err" id="gerr" hidden></p><button class="b" id="gb"></button></div></form></div>
+
+<div class="ly" id="app" hidden>
+<aside class="sb"><h1>ACES DINELEARN<small>Department Admin</small></h1><nav id="nav"></nav></aside>
+<section class="mn"><header class="tp"><b id="sch"></b><div><span id="dt"></span> &nbsp; <button class="b o s" id="out">Sign out</button></div></header><div class="pad" id="pg"></div></section>
+</div>
+<div id="mr"></div><div class="tt" id="tt" role="status" aria-live="polite"></div>
+
+<script>
+/* Prototype: browser storage only (not real security).
+   Teacher accounts keep the SAME format as before under  bshm.accounts
+   (hash = SHA-256(salt + ':' + password)), so your login page still works.
+   Everything else (programs, sections, subjects, students, enrollment, assignments, activity log) is in  bshm.db  */
+(function(){'use strict';
+const $=i=>document.getElementById(i),KEY='bshm.accounts',CRED='bshm.admin.cred',SESS='bshm.admin.session',DBK='bshm.db';
+let ACC=[],D,pg='dash',q='',RW,RP,AF,tt;
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const toast=m=>{const t=$('tt');t.textContent=m;t.className='tt on';clearTimeout(tt);tt=setTimeout(()=>t.className='tt',2800)};
+const jget=k=>{try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}};
+const jset=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v));return true}catch(e){toast('Could not save. Browser storage may be full or blocked.');return false}};
+const hex=u=>Array.from(u,x=>('0'+x.toString(16)).slice(-2)).join('');
+const rnd=n=>crypto.getRandomValues(new Uint8Array(n));
+const uid=()=>'i'+Date.now().toString(36)+hex(rnd(2));
+const hashPw=(salt,pw)=>{const s=salt+':'+pw;
+ if(crypto.subtle&&window.TextEncoder)return crypto.subtle.digest('SHA-256',new TextEncoder().encode(s)).then(b=>hex(new Uint8Array(b)));
+ let h=5381;for(let i=0;i<s.length;i++)h=((h<<5)+h+s.charCodeAt(i))|0;return Promise.resolve('f'+(h>>>0).toString(16))};
+const genPw=()=>{const c='ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789',r=rnd(10);return Array.from(r,x=>c[x%c.length]).join('')};
+const dstr=i=>{const d=new Date(i);return isNaN(d)?'':d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})};
+const showErr=(id,m)=>{const e=$(id);e.textContent=m||'';e.hidden=!m};
+
+/* ---- data ---- */
+const load=()=>{const v=jget(KEY);ACC=Array.isArray(v)?v:[];
+ D=Object.assign({programs:[{id:'p1',code:'BSHM',name:'BS in Hospitality Management'}],years:['1st Year','2nd Year','3rd Year','4th Year'].map((n,i)=>({id:'y'+i,name:n})),sections:[],subjects:[],students:[],staff:[],enroll:[],assign:[],log:[],set:{school:'ACES Polytechnic College, Inc.',ay:'2025-2026'}},jget(DBK)||{})};
+const save=()=>jset(DBK,D),saveAcc=()=>jset(KEY,ACC);
+const teachers=()=>ACC.filter(a=>a&&a.role==='teacher'),byId=id=>ACC.find(a=>String(a.id)===String(id));
+const taken=(f,v,skip)=>{v=String(v).trim().toLowerCase();return ACC.some(a=>a&&String(a.id)!==String(skip)&&String(a[f]||'').toLowerCase()===v)};
+const lg=(a,d)=>{D.log.unshift({t:new Date().toISOString(),a,d});D.log=D.log.slice(0,50);save()};
+const P=()=>D.programs.map(x=>x.code),Y=()=>D.years.map(x=>x.name),SEC=()=>D.sections.map(x=>x.name);
+const E={
+ programs:{t:'Programs',l:'Program',f:[['code','Code'],['name','Program name']]},
+ years:{t:'Year Levels',l:'Year',f:[['name','Year level']]},
+ sections:{t:'Sections',l:'Section',f:[['name','Section name'],['program','Program',P],['year','Year level',Y]]},
+ subjects:{t:'Subjects',l:'Subject',f:[['code','Code'],['title','Title'],['units','Units'],['program','Program',P]]},
+ enroll:{t:'Student Enrollment',l:'Enrollment',f:[['student','Student',()=>D.students.map(s=>s.no+' · '+s.name)],['section','Section',SEC],['term','Term',()=>['1st Semester','2nd Semester','Summer']]]},
+ assign:{t:'Faculty Assignment',l:'Faculty',f:[['faculty','Faculty',()=>teachers().map(x=>x.name)],['subject','Subject',()=>D.subjects.map(x=>x.code)],['section','Section',SEC]]},
+ students:{t:'Students',l:'Student',f:[['no','Student no.'],['name','Full name'],['program','Program',P],['year','Year level',Y]]},
+ staff:{t:'Staff',l:'Staff',f:[['name','Full name'],['pos','Position'],['email','Email']]}};
+const NAV=[['dash','Dashboard'],['Academic Management',[['programs'],['years'],['sections'],['subjects']]],['Enrollment',[['enroll'],['assign']]],['Users',[['students'],['fac','Faculty'],['staff']]],['Reports',[['r1','Academic Reports'],['r2','Enrollment Reports'],['r3','Performance Reports']]],['set','Settings']];
+
+/* ---- modal ---- */
+const mod=h=>{$('mr').innerHTML='<div class="mdl" id="md"><div class="mp" role="dialog" aria-modal="true">'+h+'</div></div>';const f=$('mr').querySelector('input,select,button');if(f)f.focus()};
+const close=()=>{$('mr').innerHTML=''};
+document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
+$('mr').addEventListener('click',e=>{if(e.target.id==='md'||e.target.closest('[data-close]'))close();const g=e.target.closest('[data-gen]');if(g)$('pw').value=genPw()});
+function form(t,body,ok,btn){mod('<h3>'+t+'</h3><form class="fm" id="mf" novalidate>'+body+'<p class="err" id="me" hidden></p><div class="ft"><button class="b o" type="button" data-close>Cancel</button><button class="b" type="submit">'+(btn||'Save changes')+'</button></div></form>');
+ $('mf').onsubmit=ev=>{ev.preventDefault();const fd={};new FormData($('mf')).forEach((v,k)=>fd[k]=String(v).trim());
+  Promise.resolve(ok(fd)).then(m=>{if(m)return showErr('me',m);close();render();if(AF){AF();AF=null}})}}
+const inp=(k,l,v,x)=>'<label>'+l+'<input name="'+k+'" value="'+esc(v||'')+'" '+(x||'')+'></label>';
+
+/* ---- generic CRUD ---- */
+function rowsC(){const e=E[pg],ks=e.f.map(x=>x[0]);
+ return D[pg].filter(r=>!q||ks.some(k=>String(r[k]).toLowerCase().includes(q))).map(r=>'<tr>'+ks.map(k=>'<td>'+esc(r[k])+'</td>').join('')+'<td><div class="ac"><button class="b o s" data-a="e" data-id="'+r.id+'">Edit</button><button class="b d s" data-a="x" data-id="'+r.id+'">Delete</button></div></td></tr>').join('')||'<tr><td colspan="9" class="none">Nothing here yet. Select Add to create the first record.</td></tr>'}
+const head=(t,s,btn)=>'<div class="hd"><div><h2>'+t+'</h2><p class="sub">'+s+'</p></div>'+(btn||'')+'</div>';
+function crud(){const e=E[pg];RW=rowsC;
+ return head(e.t,'Manage '+e.t.toLowerCase()+' for the BSHM department.','<button class="b" data-a="add">Add '+e.l.toLowerCase()+'</button>')+
+ '<div class="cd"><input id="q" type="search" placeholder="Search" aria-label="Search"><div class="tw"><table><thead><tr>'+e.f.map(x=>'<th>'+x[1]+'</th>').join('')+'<th></th></tr></thead><tbody id="tb">'+rowsC()+'</tbody></table></div></div>'}
+function ent(r){const e=E[pg],o=r||{},bad=e.f.find(x=>x[2]&&!x[2]().length);
+ if(bad)return toast('Add at least one '+bad[1].toLowerCase()+' first.');
+ form((r?'Edit ':'Add ')+e.l.toLowerCase(),e.f.map(([k,l,s])=>s?'<label>'+l+'<select name="'+k+'">'+s().map(x=>'<option'+(x===o[k]?' selected':'')+'>'+esc(x)+'</option>').join('')+'</select></label>':inp(k,l,o[k])).join(''),fd=>{
+  if(e.f.some(([k])=>!fd[k]))return 'Fill in every field.';
+  if(r)Object.assign(r,fd);else D[pg].push(Object.assign({id:uid()},fd));
+  lg(e.l,(r?'Updated ':'Added ')+Object.values(fd)[0]);return save()?0:'Could not save.'})}
+
+/* ---- faculty (teacher accounts) ---- */
+function rowsF(){return teachers().filter(a=>!q||(a.name+a.email+a.username+(a.empId||'')).toLowerCase().includes(q)).map(a=>{const off=a.status==='disabled',cl=D.assign.filter(x=>x.faculty===a.name);
+ return '<tr><td><b>'+esc(a.name)+'</b><small>'+esc(a.email)+'</small></td><td>'+esc(a.username)+'<small>Added '+dstr(a.created)+'</small></td><td>'+(cl.length?cl.map(x=>'<span class="mini">'+esc(x.subject+' · '+x.section)+'</span>').join(''):'<small>No assignment yet</small>')+'</td><td><span class="pill'+(off?'':' a')+'">'+(off?'Disabled':'Active')+'</span>'+(a.mustChange?'<small>Password not changed yet</small>':'')+'</td><td><div class="ac"><button class="b o s" data-a="fe" data-id="'+esc(a.id)+'">Edit</button><button class="b o s" data-a="rp" data-id="'+esc(a.id)+'">Reset password</button><button class="b o s" data-a="tg" data-id="'+esc(a.id)+'">'+(off?'Enable':'Disable')+'</button><button class="b d s" data-a="fx" data-id="'+esc(a.id)+'">Delete</button></div></td></tr>'}).join('')||'<tr><td colspan="5" class="none">No teacher accounts yet. Select Create teacher account.</td></tr>'}
+function fac(){RW=rowsF;return head('Faculty','Create teacher accounts and manage who can sign in.','<button class="b" data-a="add">Create teacher account</button>')+
+ '<div class="cd"><input id="q" type="search" placeholder="Search name, email or username" aria-label="Search"><div class="tw"><table><thead><tr><th>Teacher</th><th>Username</th><th>Assigned</th><th>Status</th><th></th></tr></thead><tbody id="tb">'+rowsF()+'</tbody></table></div></div>'}
+function reveal(t,a,pw){mod('<h3>'+t+'</h3><p class="sub">Share these sign-in details with the teacher.</p><div class="cr"><div><span>Name</span><b>'+esc(a.name)+'</b></div><div><span>Username</span><code>'+esc(a.username)+'</code></div><div><span>Temporary password</span><code>'+esc(pw)+'</code></div></div><p class="note">This password is not stored and cannot be shown again. If it is lost, use Reset password.</p><div class="ft"><button class="b o" id="cp">Copy details</button><button class="b" data-close>Done</button></div>');
+ $('cp').onclick=()=>{const x='ACES DineLearn teacher account\nName: '+a.name+'\nUsername: '+a.username+'\nTemporary password: '+pw;
+  (navigator.clipboard?navigator.clipboard.writeText(x).then(()=>toast('Details copied.'),()=>toast('Could not copy. Select the text manually.')):toast('Copy is not available here.'))}}
+function facNew(){form('Create teacher account',inp('name','Full name','','placeholder="e.g. Liza Santos"')+inp('email','Email','','type="email"')+inp('username','Username','','autocapitalize="none" placeholder="e.g. lsantos"')+inp('empId','Employee ID (optional)')+
+ '<label>Temporary password<span style="display:flex;gap:8px"><input id="pw" name="pw" value="'+genPw()+'" autocomplete="off"><button class="b o s" type="button" data-gen>Generate</button></span></label>',fd=>{
+  const u=fd.username.toLowerCase();
+  if(!fd.name)return 'Enter the teacher\u2019s full name.';
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fd.email))return 'Enter a valid email address.';
+  if(!/^[a-z0-9._-]{3,30}$/.test(u))return 'Username must be 3–30 characters: letters, numbers, dot, dash or underscore.';
+  if(taken('username',u))return 'That username is already used.';
+  if(taken('email',fd.email))return 'An account with that email already exists.';
+  if(fd.pw.length<8)return 'The password needs at least 8 characters.';
+  const salt=hex(rnd(8));
+  return hashPw(salt,fd.pw).then(h=>{const a={id:'t'+Date.now().toString(36)+hex(rnd(2)),role:'teacher',name:fd.name,email:fd.email,username:u,empId:fd.empId,dept:'BSHM Department',courses:[],salt,hash:h,status:'active',mustChange:true,created:new Date().toISOString()};
+   ACC.push(a);if(!saveAcc()){ACC.pop();return 'Could not save.'}lg('Faculty','Account created for '+a.name);AF=()=>reveal('Account created',a,fd.pw);return 0})},'Create account')}
+function facEdit(a){form('Edit teacher',inp('name','Full name',a.name)+inp('email','Email',a.email,'type="email"')+inp('empId','Employee ID',a.empId),fd=>{
+ if(!fd.name)return 'Enter the full name.';if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fd.email))return 'Enter a valid email address.';
+ if(taken('email',fd.email,a.id))return 'Another account uses that email.';
+ const p=Object.assign({},a);D.assign.forEach(x=>{if(x.faculty===a.name)x.faculty=fd.name});Object.assign(a,fd);if(!saveAcc()){Object.assign(a,p);return 'Could not save.'}save();return 0})}
+
+/* ---- dashboard ---- */
+const COL=['#4B2A9B','#7C4DDB','#B9A4EE','#E0D5FA'];
+function dash(){
+ const yr=D.years.map(y=>[y.name,D.students.filter(s=>s.year===y.name).length,D.enroll.filter(e=>{const s=D.students.find(s=>s.no+' · '+s.name===e.student);return s&&s.year===y.name}).length]);
+ const mx=Math.max(1,...yr.flatMap(r=>[r[1],r[2]])),pc=D.programs.map((p,i)=>[p.code,D.students.filter(s=>s.program===p.code).length,COL[i%4]]),tot=D.students.length;
+ let a=0;const cg=tot?'conic-gradient('+pc.map(p=>{const s=a;a+=p[1]/tot*100;return p[2]+' '+s+'% '+a+'%'}).join(',')+')':'#EEE9FA';
+ const lgrows=D.log.slice(0,6).map(l=>'<tr><td>'+dstr(l.t)+'</td><td><span class="pill a">'+esc(l.a)+'</span></td><td>'+esc(l.d)+'</td></tr>').join('')||'<tr><td colspan="3" class="none">No activity yet. Actions you take will show here.</td></tr>';
+ const qa=[['sections','Add section'],['subjects','Add subject'],['enroll','Enroll student'],['assign','Assign faculty']].map(x=>'<button class="b o" data-go="'+x[0]+'" data-add="1">'+x[1]+'</button>').join('');
+ return head('Department Admin Dashboard','Manage programs, subjects, sections, faculty, and enrollment for the BSHM department.')+
+ '<div class="st"><div>Total students<b>'+tot+'</b></div><div>Total faculty<b>'+teachers().length+'</b></div><div>Total subjects<b>'+D.subjects.length+'</b></div><div>Total sections<b>'+D.sections.length+'</b></div><div>Total enrollments<b>'+D.enroll.length+'</b></div></div>'+
+ '<div class="g3"><div class="cd"><h3>Students and enrollments by year level</h3><div class="ch">'+yr.map(r=>'<div><i class="br" style="height:'+Math.max(2,r[1]/mx*100)+'%" title="Students: '+r[1]+'"></i><i class="br l" style="height:'+Math.max(2,r[2]/mx*100)+'%" title="Enrollments: '+r[2]+'"></i></div>').join('')+'</div><div class="lb">'+yr.map(r=>'<span>'+esc(r[0])+'<br>'+r[1]+' / '+r[2]+'</span>').join('')+'</div><p class="sub">Dark bar: students. Light bar: enrollments.</p></div>'+
+ '<div class="cd"><h3>Program distribution</h3><div class="dn" style="background:'+cg+'"><i>'+tot+'<br>students</i></div><div class="lg">'+pc.map(p=>'<div><span><em style="background:'+p[2]+'"></em>'+esc(p[0])+'</span><b>'+p[1]+'</b></div>').join('')+'</div></div>'+
+ '<div class="cd"><h3>Quick actions</h3><div class="qa">'+qa+'<button class="b o" data-go="r2">Generate report</button></div></div></div>'+
+ '<div class="cd"><h3>Recent activities</h3><div class="tw"><table><thead><tr><th>Date</th><th>Type</th><th>Details</th></tr></thead><tbody>'+lgrows+'</tbody></table></div></div>'}
+
+/* ---- reports & settings ---- */
+function rep(){let t,h,r;
+ if(pg==='r1'){t='Academic Reports';h=['Program','Subjects','Sections','Students'];r=D.programs.map(p=>[p.code,D.subjects.filter(x=>x.program===p.code).length,D.sections.filter(x=>x.program===p.code).length,D.students.filter(x=>x.program===p.code).length])}
+ else if(pg==='r2'){t='Enrollment Reports';h=['Section','Program','Year level','Enrolled'];r=D.sections.map(s=>[s.name,s.program,s.year,D.enroll.filter(e=>e.section===s.name).length])}
+ else{t='Performance Reports';h=['Faculty','Assigned classes','Subjects'];r=teachers().map(f=>{const c=D.assign.filter(x=>x.faculty===f.name);return [f.name,c.length,c.map(x=>x.subject).join(', ')||'-']})}
+ RP={t,h,r};
+ return head(t,'Generated from the records in this system.','<span class="ac"><button class="b o" data-a="pr">Print</button><button class="b" data-a="csv">Export CSV</button></span>')+
+ (pg==='r3'?'<p class="note">Grades, quizzes, and pass rates will appear here once the LMS records them. For now this shows faculty load.</p>':'')+
+ '<div class="cd tw"><table><thead><tr>'+h.map(x=>'<th>'+x+'</th>').join('')+'</tr></thead><tbody>'+(r.map(x=>'<tr>'+x.map(c=>'<td>'+esc(c)+'</td>').join('')+'</tr>').join('')||'<tr><td colspan="9" class="none">No data to report yet.</td></tr>')+'</tbody></table></div>'}
+function sett(){return head('Settings','School details shown across the admin pages.')+'<div class="cd fm" style="max-width:460px">'+inp('school','School name',D.set.school,'id="sn"')+inp('ay','Academic year',D.set.ay,'id="ay"')+'<button class="b" data-a="sv">Save settings</button></div>'}
+
+/* ---- router ---- */
+function nav(){$('nav').innerHTML=NAV.map(n=>Array.isArray(n[1])?'<p>'+n[0]+'</p>'+n[1].map(i=>link(i)).join(''):link(n)).join('')}
+const link=i=>'<a href="#" data-n="'+i[0]+'"'+(pg===i[0]?' class="on" aria-current="page"':'')+'>'+(i[1]||E[i[0]].t)+'</a>';
+function render(){nav();$('sch').textContent=D.set.school;$('pg').innerHTML=(pg==='dash'?dash:pg==='fac'?fac:pg==='set'?sett:/^r\d$/.test(pg)?rep:crud)()}
+const go=p=>{pg=p;q='';render();scrollTo(0,0)};
+$('nav').onclick=e=>{const a=e.target.closest('[data-n]');if(a){e.preventDefault();go(a.dataset.n)}};
+$('pg').addEventListener('input',e=>{if(e.target.id==='q'){q=e.target.value.trim().toLowerCase();$('tb').innerHTML=RW()}});
+$('pg').onclick=e=>{const b=e.target.closest('[data-a],[data-go]');if(!b)return;
+ if(b.dataset.go){go(b.dataset.go);if(b.dataset.add)act('add');return}act(b.dataset.a,b.dataset.id)};
+function act(a,id){const t=byId(id);
+ if(a==='add')return pg==='fac'?facNew():ent();
+ if(a==='e')return ent(D[pg].find(r=>r.id===id));
+ if(a==='x'){if(!confirm('Delete this record? This cannot be undone.'))return;D[pg]=D[pg].filter(r=>r.id!==id);lg(E[pg].l,'Deleted a record');return render()}
+ if(a==='fe'&&t)return facEdit(t);
+ if(a==='rp'&&t){if(!confirm('Reset the password for '+t.name+'? Their current password will stop working.'))return;
+  const pw=genPw(),salt=hex(rnd(8));return hashPw(salt,pw).then(h=>{const p=[t.salt,t.hash,t.mustChange];t.salt=salt;t.hash=h;t.mustChange=true;if(!saveAcc()){[t.salt,t.hash,t.mustChange]=p;return}lg('Faculty','Password reset for '+t.name);render();reveal('Password reset',t,pw)})}
+ if(a==='tg'&&t){const off=t.status!=='disabled';if(off&&!confirm('Disable '+t.name+'? They cannot sign in until you enable the account again.'))return;
+  t.status=off?'disabled':'active';if(!saveAcc()){t.status=off?'active':'disabled';return}lg('Faculty',(off?'Disabled ':'Enabled ')+t.name);render();return toast(off?'Account disabled.':'Account enabled.')}
+ if(a==='fx'&&t){if(!confirm('Delete the account for '+t.name+'? This cannot be undone.'))return;const i=ACC.indexOf(t);ACC.splice(i,1);if(!saveAcc()){ACC.splice(i,0,t);return}lg('Faculty','Deleted '+t.name);render();return toast('Account deleted.')}
+ if(a==='sv'){D.set.school=$('sn').value.trim()||D.set.school;D.set.ay=$('ay').value.trim()||D.set.ay;if(save()){render();toast('Settings saved.')}return}
+ if(a==='pr')return print();
+ if(a==='csv'){const c=[RP.h].concat(RP.r).map(r=>r.map(x=>'"'+String(x).replace(/"/g,'""')+'"').join(',')).join('\n'),l=document.createElement('a');
+  l.href=URL.createObjectURL(new Blob([c],{type:'text/csv'}));l.download=RP.t.replace(/ /g,'-').toLowerCase()+'.csv';l.click()}}
+window.addEventListener('storage',e=>{if(e.key===KEY||e.key===DBK){load();render()}});
+
+/* ---- admin sign-in gate ---- */
+function start(){$('gate').hidden=true;$('app').hidden=false;load();$('dt').textContent=new Date().toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});render()}
+function gate(){const c=jget(CRED),first=!(c&&c.hash);
+ $('gt').textContent=first?'Set up admin access':'Admin sign-in';$('gp').textContent=first?'First time here. Choose a password for the admin account.':'';
+ $('gcw').hidden=!first;$('gb').textContent=first?'Save and continue':'Sign in';
+ $('gf').onsubmit=ev=>{ev.preventDefault();showErr('gerr','');const pw=$('gpw').value,ok=()=>{try{sessionStorage.setItem(SESS,'1')}catch(e){}start()};
+  if(first){if(pw.length<8)return showErr('gerr','Use at least 8 characters.');if(pw!==$('gpw2').value)return showErr('gerr','The two passwords do not match.');
+   const salt=hex(rnd(8));hashPw(salt,pw).then(h=>{if(jset(CRED,{user:'admin',salt,hash:h}))ok()})}
+  else hashPw(c.salt,pw).then(h=>{if(h!==c.hash){showErr('gerr','Wrong password.');return}ok()})};
+ $('gpw').focus()}
+$('out').onclick=()=>{try{sessionStorage.removeItem(SESS)}catch(e){}location.reload()};
+let s=false;try{s=sessionStorage.getItem(SESS)==='1'&&!!(jget(CRED)&&jget(CRED).hash)}catch(e){}
+s?start():gate();
+})();
+</script>
+</body></html>
